@@ -58,7 +58,7 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
 
   let transactionQuery = supabase
     .from("transactions")
-    .select("id, amount, type, note, occurred_at, tags, category:categories(name), creator:profiles(nickname)")
+    .select("id, amount, type, note, occurred_at, tags, category_id, created_by, category:categories(name)")
     .eq("ledger_id", id)
     .order("occurred_at", { ascending: false })
     .order("id", { ascending: false })
@@ -75,15 +75,23 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
   if (cursorOccurredAt) transactionQuery = transactionQuery.lt("occurred_at", cursorOccurredAt);
   if (cursorId && !cursorOccurredAt) transactionQuery = transactionQuery.lt("id", cursorId);
 
-  const [{ data: categories }, { data: transactionRows }, { data: members }] = await Promise.all([
+  const [{ data: categories }, transactionResult, { data: members }] = await Promise.all([
     supabase.from("categories").select("id, name, type").eq("ledger_id", id).order("sort_order", { ascending: true }),
     transactionQuery,
     supabase.from("ledger_members").select("role, profile:profiles(nickname)").eq("ledger_id", id).limit(6),
   ]);
 
-  const transactions = transactionRows ?? [];
+  const transactionError = transactionResult.error;
+  const transactions = transactionResult.data ?? [];
   const hasMore = transactions.length > pageSize;
   const visibleTransactions = hasMore ? transactions.slice(0, pageSize) : transactions;
+
+  const creatorIds = [...new Set(visibleTransactions.map((item) => item.created_by).filter(Boolean))];
+  const { data: creators, error: creatorsError } = creatorIds.length
+    ? await supabase.from("profiles").select("id, nickname").in("id", creatorIds)
+    : { data: [], error: null };
+
+  const creatorMap = new Map((creators ?? []).map((item) => [item.id, item.nickname]));
 
   const summary = visibleTransactions.reduce(
     (acc, item) => {
@@ -98,7 +106,6 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
 
   const transactionItems = visibleTransactions.map((item) => {
     const categoryRelation = (item as { category?: { name?: string } | Array<{ name?: string }> | null }).category;
-    const creatorRelation = (item as { creator?: { nickname?: string } | Array<{ nickname?: string }> | null }).creator;
 
     return {
       id: item.id,
@@ -108,7 +115,7 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
       occurred_at: item.occurred_at,
       tags: item.tags,
       category_name: Array.isArray(categoryRelation) ? categoryRelation[0]?.name ?? "未分类" : categoryRelation?.name ?? "未分类",
-      creator_name: Array.isArray(creatorRelation) ? creatorRelation[0]?.nickname ?? "未知成员" : creatorRelation?.nickname ?? "未知成员",
+      creator_name: creatorMap.get(item.created_by) ?? "未知成员",
     };
   });
 
@@ -195,6 +202,8 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
             currentKeyword={currentKeyword}
           />
         </div>
+        {transactionError ? <p className="alert-error">交易列表查询失败：{transactionError.message}</p> : null}
+        {!transactionError && creatorsError ? <p className="alert-error">用户信息查询失败：{creatorsError.message}</p> : null}
         <TransactionList items={transactionItems} currency={ledger.currency} />
         <div className="button-row" style={{ justifyContent: "space-between", marginTop: 18 }}>
           <Link href={firstPageHref} className="button-secondary">
