@@ -35,22 +35,21 @@ export function CreateTransactionForm({
   }, [state.success]);
 
   return (
-    <form ref={formRef} action={action} className="grid" style={{ gap: 14 }}>
+    <form ref={formRef} action={action} className="form-stack">
       <input type="hidden" name="ledger_id" value={ledgerId} />
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1.2fr", gap: 12 }}>
         <select
           name="type"
           value={type}
           onChange={(event) => setType(event.target.value as "expense" | "income" | "transfer")}
-          className="panel"
-          style={{ padding: "14px 16px", background: "white" }}
+          className="field-select"
         >
           <option value="expense">支出</option>
           <option value="income">收入</option>
           <option value="transfer">转账</option>
         </select>
-        <input name="amount" type="number" step="0.01" min="0.01" placeholder="金额" required className="panel" style={{ padding: "14px 16px", background: "white" }} />
-        <select name="category_id" defaultValue="" className="panel" style={{ padding: "14px 16px", background: "white" }}>
+        <input name="amount" type="number" step="0.01" min="0.01" placeholder="金额" required className="field" />
+        <select name="category_id" defaultValue="" className="field-select">
           <option value="">未分类</option>
           {filteredCategories.map((category) => (
             <option key={category.id} value={category.id}>
@@ -62,15 +61,14 @@ export function CreateTransactionForm({
           name="occurred_at"
           type="datetime-local"
           defaultValue={defaultOccurredAt}
-          className="panel"
-          style={{ padding: "14px 16px", background: "white" }}
+          className="field"
         />
       </div>
-      <input name="note" placeholder="备注，例如：午餐、打车、工资发放" className="panel" style={{ padding: "14px 16px", background: "white" }} />
-      <input name="tags" placeholder="标签，使用英文逗号分隔，例如：工作日,外卖" className="panel" style={{ padding: "14px 16px", background: "white" }} />
-      {state.error ? <p style={{ margin: 0, color: "#b42318" }}>{state.error}</p> : null}
-      {state.success ? <p style={{ margin: 0, color: "var(--accent)" }}>交易已新增，列表已刷新。</p> : null}
-      <button type="submit" disabled={pending} className="panel" style={{ padding: "14px 18px", background: "var(--accent)", color: "var(--accent-foreground)", cursor: "pointer" }}>
+      <input name="note" placeholder="备注，例如：午餐、打车、工资发放" className="field" />
+      <input name="tags" placeholder="标签，使用英文逗号分隔，例如：工作日,外卖" className="field" />
+      {state.error ? <p className="alert-error">{state.error}</p> : null}
+      {state.success ? <p className="alert-success">交易已新增，列表已刷新。</p> : null}
+      <button type="submit" disabled={pending} className="button-primary">
         {pending ? "保存中..." : "新增交易"}
       </button>
     </form>

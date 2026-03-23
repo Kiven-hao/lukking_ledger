@@ -10,8 +10,7 @@ export function SignOutButton() {
     <button
       type="button"
       onClick={() => startTransition(async () => signOutAction())}
-      className="panel"
-      style={{ padding: "12px 14px", cursor: "pointer", background: "#fff7ed" }}
+      className="button-secondary"
     >
       {pending ? "退出中..." : "退出登录"}
     </button>

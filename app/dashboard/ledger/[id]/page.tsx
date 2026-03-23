@@ -132,55 +132,57 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
 
   return (
     <div className="grid">
-      <section className="panel" style={{ padding: 28 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "start", flexWrap: "wrap" }}>
+      <section className="panel glass-panel page-header fade-up">
+        <span className="section-kicker">Ledger Detail</span>
+        <div className="page-header-top">
           <div>
             <p style={{ margin: 0, color: "var(--muted-foreground)" }}>
               {ledger.icon ?? "book"} · {ledger.currency}
             </p>
-            <h1 style={{ margin: "10px 0 8px" }}>{ledger.name}</h1>
-            <p style={{ margin: 0, color: "var(--muted-foreground)", lineHeight: 1.7 }}>{ledger.description || "还没有账本说明。"}</p>
+            <h1 className="page-title" style={{ marginTop: 10 }}>{ledger.name}</h1>
+            <p className="body-copy" style={{ margin: 0 }}>{ledger.description || "还没有账本说明。"}</p>
           </div>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <Link href={`/dashboard/ledger/${id}/analytics`} className="panel" style={{ padding: "12px 14px" }}>
+          <div className="button-row">
+            <Link href={`/dashboard/ledger/${id}/analytics`} className="action-chip">
               查看分析
             </Link>
-            <Link href={`/dashboard/ledger/${id}/settings`} className="panel" style={{ padding: "12px 14px" }}>
+            <Link href={`/dashboard/ledger/${id}/settings`} className="action-chip">
               账本设置
             </Link>
           </div>
         </div>
       </section>
 
-      <section style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16 }}>
-        <div className="panel" style={{ padding: 20 }}>
+      <section className="stats-grid fade-up stagger-1">
+        <div className="stat-card">
           <p style={{ margin: 0, color: "var(--muted-foreground)" }}>本页收入</p>
-          <h2 style={{ marginBottom: 0 }}>{summary.income.toFixed(2)}</h2>
+          <strong>{summary.income.toFixed(2)}</strong>
         </div>
-        <div className="panel" style={{ padding: 20 }}>
+        <div className="stat-card">
           <p style={{ margin: 0, color: "var(--muted-foreground)" }}>本页支出</p>
-          <h2 style={{ marginBottom: 0 }}>{summary.expense.toFixed(2)}</h2>
+          <strong>{summary.expense.toFixed(2)}</strong>
         </div>
-        <div className="panel" style={{ padding: 20 }}>
+        <div className="stat-card">
           <p style={{ margin: 0, color: "var(--muted-foreground)" }}>本页转账</p>
-          <h2 style={{ marginBottom: 0 }}>{summary.transfer.toFixed(2)}</h2>
+          <strong>{summary.transfer.toFixed(2)}</strong>
         </div>
-        <div className="panel" style={{ padding: 20 }}>
+        <div className="stat-card">
           <p style={{ margin: 0, color: "var(--muted-foreground)" }}>成员数</p>
-          <h2 style={{ marginBottom: 0 }}>{members?.length ?? 0}</h2>
+          <strong>{members?.length ?? 0}</strong>
         </div>
       </section>
 
-      <section className="panel" style={{ padding: 28 }}>
+      <section className="panel glass-panel fade-up stagger-2" style={{ padding: 28 }}>
         <h2 style={{ marginTop: 0 }}>新增交易</h2>
+        <p className="body-copy" style={{ marginTop: 0 }}>表单会根据交易类型联动分类，让录入动作更短、更顺。</p>
         <CreateTransactionForm ledgerId={id} categories={categories ?? []} />
       </section>
 
-      <section className="panel" style={{ padding: 28 }}>
+      <section className="panel glass-panel fade-up stagger-3" style={{ padding: 28 }}>
         <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center", marginBottom: 18, flexWrap: "wrap" }}>
           <div>
             <h2 style={{ margin: 0 }}>交易列表</h2>
-            <p style={{ margin: "8px 0 0", color: "var(--muted-foreground)" }}>支持按类型、分类、日期和备注关键字筛选，并使用 cursor 翻页。</p>
+            <p className="body-copy" style={{ margin: "8px 0 0" }}>支持按类型、分类、日期和备注关键字筛选，并使用 cursor 翻页。</p>
           </div>
         </div>
         <div style={{ marginBottom: 18 }}>
@@ -194,16 +196,16 @@ export default async function LedgerDetailPage({ params, searchParams }: LedgerP
           />
         </div>
         <TransactionList items={transactionItems} currency={ledger.currency} />
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 12, marginTop: 18, flexWrap: "wrap" }}>
-          <Link href={firstPageHref} className="panel" style={{ padding: "12px 14px" }}>
+        <div className="button-row" style={{ justifyContent: "space-between", marginTop: 18 }}>
+          <Link href={firstPageHref} className="button-secondary">
             回到第一页
           </Link>
           {nextHref ? (
-            <Link href={nextHref} className="panel" style={{ padding: "12px 14px", background: "var(--accent)", color: "var(--accent-foreground)" }}>
+            <Link href={nextHref} className="button-primary">
               下一页
             </Link>
           ) : (
-            <span style={{ color: "var(--muted-foreground)" }}>已经到底了</span>
+            <span className="body-copy">已经到底了</span>
           )}
         </div>
       </section>

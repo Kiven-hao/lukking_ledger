@@ -92,6 +92,41 @@ export async function createTransactionAction(_: ActionState, formData: FormData
     return { error: parsed.error.flatten().formErrors.join(", ") || "交易信息不完整" };
   }
 
+  const { data: ledger, error: ledgerError } = await supabase
+    .from("ledgers")
+    .select("id, owner_id")
+    .eq("id", parsed.data.ledger_id)
+    .single();
+
+  if (ledgerError || !ledger) {
+    return { error: "账本不存在或你没有访问权限" };
+  }
+
+  const { data: membership, error: membershipError } = await supabase
+    .from("ledger_members")
+    .select("id, role")
+    .eq("ledger_id", parsed.data.ledger_id)
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (membershipError) {
+    return { error: membershipError.message };
+  }
+
+  if (!membership && ledger.owner_id === user.id) {
+    const { error: repairError } = await supabase.from("ledger_members").insert({
+      ledger_id: parsed.data.ledger_id,
+      user_id: user.id,
+      role: "owner",
+    });
+
+    if (repairError) {
+      return { error: `账本成员关系修复失败：${repairError.message}` };
+    }
+  } else if (membership?.role === "viewer") {
+    return { error: "当前身份仅可查看，不能新增交易" };
+  }
+
   if (parsed.data.category_id) {
     const { data: category, error: categoryError } = await supabase
       .from("categories")
@@ -108,17 +143,28 @@ export async function createTransactionAction(_: ActionState, formData: FormData
     }
   }
 
-  const { error } = await supabase.from("transactions").insert({
-    ...parsed.data,
-    category_id: parsed.data.category_id ?? null,
-    created_by: user.id,
-    note: parsed.data.note ?? null,
-    occurred_at: parsed.data.occurred_at ?? new Date().toISOString(),
-    tags: parsed.data.tags ?? [],
-  });
+  const transactionId = crypto.randomUUID();
+
+  const { data: insertedTransaction, error } = await supabase
+    .from("transactions")
+    .insert({
+      id: transactionId,
+      ...parsed.data,
+      category_id: parsed.data.category_id ?? null,
+      created_by: user.id,
+      note: parsed.data.note ?? null,
+      occurred_at: parsed.data.occurred_at ?? new Date().toISOString(),
+      tags: parsed.data.tags ?? [],
+    })
+    .select("id")
+    .single();
 
   if (error) {
     return { error: error.message };
+  }
+
+  if (!insertedTransaction?.id) {
+    return { error: "交易写入未确认成功，请稍后刷新后重试" };
   }
 
   revalidatePath(`/dashboard/ledger/${parsed.data.ledger_id}`);

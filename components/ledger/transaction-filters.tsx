@@ -31,14 +31,13 @@ export function TransactionFilters({
   }, [categories, type]);
 
   return (
-    <form method="GET" className="grid" style={{ gap: 14 }}>
+    <form method="GET" className="form-stack">
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1.2fr", gap: 12 }}>
         <select
           name="type"
           value={type}
           onChange={(event) => setType(event.target.value)}
-          className="panel"
-          style={{ padding: "14px 16px", background: "white" }}
+          className="field-select"
         >
           <option value="">全部类型</option>
           <option value="expense">支出</option>
@@ -48,8 +47,7 @@ export function TransactionFilters({
         <select
           name="category_id"
           defaultValue={currentCategoryId}
-          className="panel"
-          style={{ padding: "14px 16px", background: "white" }}
+          className="field-select"
         >
           <option value="">全部分类</option>
           {filteredCategories.map((category) => (
@@ -58,22 +56,21 @@ export function TransactionFilters({
             </option>
           ))}
         </select>
-        <input name="start" type="date" defaultValue={currentStart} className="panel" style={{ padding: "14px 16px", background: "white" }} />
-        <input name="end" type="date" defaultValue={currentEnd} className="panel" style={{ padding: "14px 16px", background: "white" }} />
+        <input name="start" type="date" defaultValue={currentStart} className="field" />
+        <input name="end" type="date" defaultValue={currentEnd} className="field" />
         <input
           name="keyword"
           type="text"
           defaultValue={currentKeyword}
           placeholder="按备注关键字搜索"
-          className="panel"
-          style={{ padding: "14px 16px", background: "white" }}
+          className="field"
         />
       </div>
-      <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-        <button type="submit" className="panel" style={{ padding: "12px 16px", background: "var(--accent)", color: "var(--accent-foreground)", cursor: "pointer" }}>
+      <div className="button-row">
+        <button type="submit" className="button-primary">
           应用筛选
         </button>
-        <a href="?" className="panel" style={{ padding: "12px 16px" }}>
+        <a href="?" className="button-secondary">
           重置条件
         </a>
       </div>
