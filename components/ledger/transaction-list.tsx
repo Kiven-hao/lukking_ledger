@@ -20,8 +20,8 @@ function formatCurrency(amount: number, currency: string) {
 export function TransactionList({ items, currency }: { items: TransactionItem[]; currency: string }) {
   if (items.length === 0) {
     return (
-      <div className="panel" style={{ padding: 22 }}>
-        <p style={{ margin: 0, color: "var(--muted-foreground)" }}>还没有交易记录，先录入第一笔吧。</p>
+      <div className="panel glass-panel" style={{ padding: 22 }}>
+        <p style={{ margin: 0 }} className="body-copy">还没有交易记录，先录入第一笔吧。</p>
       </div>
     );
   }
@@ -29,7 +29,7 @@ export function TransactionList({ items, currency }: { items: TransactionItem[];
   return (
     <div className="grid">
       {items.map((item) => (
-        <article key={item.id} className="panel" style={{ padding: 20, display: "grid", gap: 10 }}>
+        <article key={item.id} className="transaction-card fade-up">
           <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
             <div>
               <p style={{ margin: 0, color: "var(--muted-foreground)", fontSize: 13 }}>

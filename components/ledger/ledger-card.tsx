@@ -12,7 +12,7 @@ type LedgerCardProps = {
 
 export function LedgerCard({ id, name, description, icon, currency, role, ownerName }: LedgerCardProps) {
   return (
-    <Link href={`/dashboard/ledger/${id}`} className="panel" style={{ padding: 22, display: "grid", gap: 14 }}>
+    <Link href={`/dashboard/ledger/${id}`} className="ledger-link fade-up">
       <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
         <div>
           <p style={{ margin: 0, color: "var(--muted-foreground)", fontSize: 13 }}>{icon ?? "book"} · {currency}</p>
@@ -20,8 +20,9 @@ export function LedgerCard({ id, name, description, icon, currency, role, ownerN
         </div>
         <span className="badge">{role}</span>
       </div>
+      <div className="soft-divider" />
       <p style={{ margin: 0, color: "var(--muted-foreground)", lineHeight: 1.7 }}>{description || "还没有填写账本描述。"} </p>
-      <p style={{ margin: 0, fontSize: 14 }}>Owner: {ownerName || "未知成员"}</p>
+      <p style={{ margin: 0, fontSize: 14 }} className="body-copy">Owner · {ownerName || "未知成员"}</p>
     </Link>
   );
 }
