@@ -43,7 +43,7 @@ export default async function DashboardLayout({
 
           {/* Brand mark */}
           <header style={{ paddingTop: 8 }}>
-            <span className="section-kicker">墨韵金簿</span>
+            <span className="section-kicker">明朗新界</span>
             <h2
               style={{
                 margin: "14px 0 0",

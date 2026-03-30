@@ -79,7 +79,7 @@ export default function HomePage() {
                 height: 6,
                 borderRadius: "var(--r-full)",
                 background: "var(--gold)",
-                boxShadow: "0 0 12px rgba(201, 169, 110, 0.4)",
+                boxShadow: "0 0 12px rgba(91, 92, 240, 0.35)",
               }}
             />
             <div
@@ -156,7 +156,7 @@ export default function HomePage() {
                   height: 48,
                   borderRadius: "var(--r-md)",
                   background: "var(--gold-glow)",
-                  border: "1px solid rgba(201, 169, 110, 0.15)",
+                  border: "1px solid rgba(91, 92, 240, 0.15)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -200,7 +200,7 @@ export default function HomePage() {
                   height: 48,
                   borderRadius: "var(--r-md)",
                   background: "var(--gold-glow)",
-                  border: "1px solid rgba(201, 169, 110, 0.15)",
+                  border: "1px solid rgba(91, 92, 240, 0.15)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -244,7 +244,7 @@ export default function HomePage() {
                   height: 48,
                   borderRadius: "var(--r-md)",
                   background: "var(--gold-glow)",
-                  border: "1px solid rgba(201, 169, 110, 0.15)",
+                  border: "1px solid rgba(91, 92, 240, 0.15)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -368,7 +368,7 @@ export default function HomePage() {
                   fontWeight: 700,
                   fontSize: 18,
                   letterSpacing: "-0.02em",
-                  boxShadow: "0 4px 20px rgba(201, 169, 110, 0.2)",
+                  boxShadow: "0 4px 20px rgba(91, 92, 240, 0.2)",
                 }}
               >
                 01
@@ -412,7 +412,7 @@ export default function HomePage() {
                   fontWeight: 700,
                   fontSize: 18,
                   letterSpacing: "-0.02em",
-                  boxShadow: "0 4px 20px rgba(201, 169, 110, 0.2)",
+                  boxShadow: "0 4px 20px rgba(91, 92, 240, 0.2)",
                 }}
               >
                 02
@@ -456,7 +456,7 @@ export default function HomePage() {
                   fontWeight: 700,
                   fontSize: 18,
                   letterSpacing: "-0.02em",
-                  boxShadow: "0 4px 20px rgba(228, 200, 138, 0.25)",
+                  boxShadow: "0 4px 20px rgba(120, 121, 241, 0.25)",
                 }}
               >
                 03
@@ -588,7 +588,7 @@ export default function HomePage() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            borderTop: "1px solid rgba(201, 169, 110, 0.12)",
+            borderTop: "1px solid rgba(91, 92, 240, 0.10)",
           }}
         >
           <div
@@ -598,7 +598,7 @@ export default function HomePage() {
               lineHeight: 1,
               marginBottom: 20,
               opacity: 0.5,
-              fontFamily: "Georgia, serif",
+              fontFamily: "inherit",
             }}
           >
             &ldquo;
@@ -695,7 +695,7 @@ export default function HomePage() {
               letterSpacing: "0.06em",
             }}
           >
-            Lukking Ledger · 墨韵金簿
+            Lukking Ledger · 明朗新界
           </p>
         </footer>
       </div>

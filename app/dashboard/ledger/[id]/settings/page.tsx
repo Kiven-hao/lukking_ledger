@@ -140,7 +140,7 @@ export default async function LedgerSettingsPage({ params }: LedgerSettingsPageP
                       padding: "2px 8px",
                       borderRadius: "var(--r-full)",
                       background: "var(--gold-glow)",
-                      border: "1px solid rgba(201,169,110,0.15)",
+                      border: "1px solid rgba(91,92,240,0.15)",
                       letterSpacing: "0.04em",
                       fontWeight: 700,
                     }}
@@ -233,7 +233,7 @@ export default async function LedgerSettingsPage({ params }: LedgerSettingsPageP
             style={{
               padding: 20,
               borderRadius: "var(--r-lg)",
-              background: "rgba(255,255,255,0.02)",
+              background: "rgba(91,92,240,0.03)",
               border: "1px solid var(--border-subtle)",
               display: "grid",
               gap: 14,

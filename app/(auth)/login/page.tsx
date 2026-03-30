@@ -36,7 +36,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                     fontSize: 18,
                     fontWeight: 700,
                     color: "var(--text-inverse)",
-                    boxShadow: "0 0 20px rgba(201, 169, 110, 0.2)",
+                    boxShadow: "0 0 20px rgba(91, 92, 240, 0.2)",
                   }}
                 >
                   簿
@@ -50,7 +50,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                     textTransform: "uppercase" as const,
                   }}
                 >
-                  墨韵金簿
+                  明朗新界
                 </span>
               </div>
 
@@ -100,7 +100,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 <strong
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--gold-bright), var(--gold))",
+                      "linear-gradient(135deg, var(--accent-bright), var(--accent))",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -116,7 +116,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 <strong
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--gold-bright), var(--gold))",
+                      "linear-gradient(135deg, var(--accent-bright), var(--accent))",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -132,7 +132,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 <strong
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--gold-bright), var(--gold))",
+                      "linear-gradient(135deg, var(--accent-bright), var(--accent))",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     backgroundClip: "text",
@@ -156,7 +156,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 height: 2,
                 borderRadius: "var(--r-full)",
                 background:
-                  "linear-gradient(90deg, var(--gold), var(--gold-dim))",
+                  "linear-gradient(90deg, var(--accent), var(--accent-dim))",
                 marginBottom: 24,
                 opacity: 0.7,
               }}
