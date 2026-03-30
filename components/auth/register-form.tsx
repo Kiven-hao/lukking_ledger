@@ -51,7 +51,7 @@ export function RegisterForm() {
         {pending ? "注册中..." : "创建账号"}
       </button>
       <p style={{ margin: 0 }} className="body-copy">
-        已有账号？<Link href="/login" style={{ color: "var(--accent)" }}>去登录</Link>
+        已有账号？<Link href="/login" style={{ color: "var(--gold)" }}>去登录</Link>
       </p>
     </form>
   );

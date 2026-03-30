@@ -41,7 +41,7 @@ export function LoginForm({ next = "/dashboard" }: { next?: string }) {
         {pending ? "登录中..." : "登录"}
       </button>
       <p style={{ margin: 0 }} className="body-copy">
-        还没有账号？<Link href="/register" style={{ color: "var(--accent-strong)" }}>先去注册</Link>
+        还没有账号？<Link href="/register" style={{ color: "var(--gold)" }}>先去注册</Link>
       </p>
     </form>
   );

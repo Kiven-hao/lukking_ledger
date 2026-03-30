@@ -7,36 +7,46 @@ export default function RegisterPage() {
         <section className="auth-shell">
           <article className="panel glass-panel auth-visual fade-up">
             <div>
-              <span className="section-kicker">New Account</span>
-              <h1 className="hero-title" style={{ fontSize: "clamp(2.5rem, 5vw, 4.3rem)" }}>
-                为你的账本关系，
+              <span className="section-kicker">Begin Your Ledger</span>
+              <h1
+                className="hero-title"
+                style={{ fontSize: "clamp(2.4rem, 5vw, 4.2rem)" }}
+              >
+                把散落的账目，
                 <br />
-                建一套耐看的秩序。
+                编成一部可传阅的经卷。
               </h1>
               <p className="hero-copy" style={{ maxWidth: 560 }}>
-                从一个账号开始，把伴侣、家庭成员或团队伙伴接进同一账本，把琐碎记录变成可追踪的共识。
+                一次注册，便可与伴侣、家人或合伙人共执一册账簿——让每笔流水不再孤立，而是彼此关联、有迹可循的叙事。
               </p>
             </div>
             <div className="auth-metrics">
               <div className="metric-card">
-                <strong>共享</strong>
-                <p style={{ margin: 0 }} className="body-copy">邀请成员进入同一个账本。</p>
+                <strong style={{ color: "var(--gold-bright)" }}>共治</strong>
+                <p style={{ margin: 0 }} className="body-copy">
+                  多人共执笔墨，权责自明。
+                </p>
               </div>
               <div className="metric-card">
-                <strong>分层</strong>
-                <p style={{ margin: 0 }} className="body-copy">角色权限天然分明。</p>
+                <strong style={{ color: "var(--gold-bright)" }}>溯源</strong>
+                <p style={{ margin: 0 }} className="body-copy">
+                  每笔流水皆可回溯至初始语境。
+                </p>
               </div>
               <div className="metric-card">
-                <strong>分析</strong>
-                <p style={{ margin: 0 }} className="body-copy">后续可直接接图表与报表。</p>
+                <strong style={{ color: "var(--gold-bright)" }}>演化</strong>
+                <p style={{ margin: 0 }} className="body-copy">
+                  数据沉淀为趋势，趋势生长为洞见。
+                </p>
               </div>
             </div>
           </article>
+
           <section className="panel glass-panel auth-panel fade-up stagger-1">
             <span className="section-kicker">Create Account</span>
             <h2 style={{ margin: "16px 0 10px", fontSize: 42 }}>注册</h2>
             <p className="body-copy" style={{ marginTop: 0 }}>
-              注册成功后，数据库触发器会自动创建 <code>profiles</code> 记录，并进入后续登录或直接登录状态。
+              落笔即立约——注册完成后系统将自动生成你的专属档案，随即可邀人共览、分权协作。
             </p>
             <RegisterForm />
           </section>

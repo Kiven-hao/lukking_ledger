@@ -32,16 +32,16 @@ export function TransactionList({ items, currency }: { items: TransactionItem[];
         <article key={item.id} className="transaction-card fade-up">
           <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "center" }}>
             <div>
-              <p style={{ margin: 0, color: "var(--muted-foreground)", fontSize: 13 }}>
+              <p style={{ margin: 0, color: "var(--text-tertiary)", fontSize: 13 }}>
                 {item.category_name} · {new Date(item.occurred_at).toLocaleString("zh-CN")}
               </p>
               <h3 style={{ margin: "8px 0 0", fontSize: 20 }}>{item.note || "未填写备注"}</h3>
             </div>
-            <strong style={{ fontSize: 22, color: item.type === "income" ? "#15803d" : item.type === "expense" ? "#b45309" : "#475569" }}>
+            <strong style={{ fontSize: 22, color: item.type === "income" ? "var(--income)" : item.type === "expense" ? "var(--expense)" : "var(--transfer)" }}>
               {item.type === "expense" ? "-" : item.type === "income" ? "+" : ""}{formatCurrency(item.amount, currency)}
             </strong>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, color: "var(--muted-foreground)", fontSize: 14 }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, color: "var(--text-secondary)", fontSize: 14 }}>
             <span>记录人：{item.creator_name}</span>
             <span>类型：{item.type}</span>
             {item.tags?.length ? <span>标签：{item.tags.join(" / ")}</span> : null}
